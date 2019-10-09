@@ -13,7 +13,7 @@ In volgende lessen zal je deze online shop zien groeien. Voor deze les maken we 
 #### Models
 Deze folder bevat de domein laag. 
 
-![Domein_SportsStore.png](https://webiii.github.io/docs/H05/domein_sportsstore.png "Domein")
+![Domein_SportsStore.png](https://webiii.github.io/docs/H05/domein_sportsstore.PNG "Domein")
 #### Data
 Deze folder bevat 1 klasse `DataSourceProvider`. De DataSourceProvider heeft drie publieke read-only properties. Ze leveren de IEnumerables aan waarop we met Linq zullen werken. 
 Als je wil zien wat deze properties bevatten kan je de private `Seed` methode raadplegen in deze klasse maar je hoeft in feite geen verdere kennis te hebben van deze klasse om de oefeningen te kunnen maken.
