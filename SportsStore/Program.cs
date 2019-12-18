@@ -36,7 +36,7 @@ namespace SportsStore
             #region Toon de naam van het product met de langste productnaam
 
             string productnaam = "";
-            Console.WriteLine($"De langste productnaam is {productnaam}.");
+            Console.WriteLine($"De langste productnaam is {products.OrderByDescending(p => p.Name.Length).FirstOrDefault().Name}.");
             Console.ReadLine();
             #endregion
 
