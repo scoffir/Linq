@@ -90,11 +90,16 @@ namespace SportsStore
             #region Maak gebruik van een anoniem type 
             // maak een lijst die de naam, de voornaam
             // en de naam van de stad van elke customer bevat
-            var customerDetails = null as string;
+            var customerDetails = customers.Select(c => new
+            {
+                c.Name,
+                c.FirstName,
+                CityName = c.City.Name
+            });
             Console.WriteLine("Details van customers");
             foreach (var c in customerDetails)
             {
-                Console.WriteLine($"{0} {0} woont in {0}");
+                Console.WriteLine("{0} {1} woont in {2}", c.Name, c.FirstName, c.CityName);
             }
             Console.ReadLine();
             #endregion
@@ -102,31 +107,37 @@ namespace SportsStore
             #region Pas vorige query aan 
             // zodat het anoniem type nu ook een boolse property bevat
             // die aangeeft of de customer reeds orders heeft
-            var customerDetails2 = null as string;
+            var customerDetails2 = customers.Select(c => new
+            {
+                c.Name,
+                c.FirstName,
+                CityName = c.City.Name,
+                Orders = c.Orders.Count > 0 ? "" : "geen"
+            });
             Console.WriteLine("Details van customers");
             foreach (var c in customerDetails2)
             {
-                Console.WriteLine($"{0} {0} woont in {0} en heeft {0} bestellingen");
+                Console.WriteLine("{0} {1} woont in {2} en heeft {3} bestellingen", c.Name, c.FirstName, c.CityName, c.Orders);
             }
             Console.ReadLine();
             #endregion
 
             #region Geef de namen van de categorieën met enkel producten die de letter 'o' in de naam hebben
 
-            IEnumerable<string> oCategories = null;
+            IEnumerable<string> oCategories = categories.Where(c => c.Products.All(p => p.Name.Contains("o"))).Select(c => c.Name);
             PrintStrings("Categorieën waarbij alle producten de letter 'o' bevatten", oCategories);
             Console.ReadLine();
             #endregion
 
             #region Geef het eerste product die de letter 'f' bevat, vertrek van de lijst van producten gesorteerd op naam
 
-            Product myProductF = null;
+            Product myProductF = products.OrderBy(p => p.Name).FirstOrDefault(p => p.Name.Contains("f"));
             PrintProduct("Eerste product met letter f", myProductF);
             Console.ReadLine();
             #endregion
 
             #region Maak een lijst van customers die reeds een product met de naam Football hebben besteld
-            IEnumerable<Customer> customersWithFootball = null;
+            IEnumerable<Customer> customersWithFootball = customers.Where(c => c.Orders.SelectMany(o => o.OrderLines).Select(o => o.Product.Name).Contains("Football"));
             PrintCustomers("Klanten die reeds Football bestelden:", customersWithFootball);
             Console.ReadLine();
             #endregion
@@ -136,13 +147,16 @@ namespace SportsStore
             //  - er geen customers zijn met die naam, 
             //  - of indien er meerdere customers zijn met die naam  
             // Test je code ook met Student0 en Student9
+            string naam = "Student1";
             try
             {
-                // hier invullen
+                var customer = customers.SingleOrDefault(c => c.Name.Equals(naam));
+                if (customer == null)
+                    Console.WriteLine($"Er zijn geen customers met de naam {naam} gevonden");
             }
             catch (Exception)
             {
-                // hier invullen
+                Console.WriteLine($"Er zijn meerdere customers met de naam {naam} gevonden");
             }
             #endregion
             Console.ReadLine();
