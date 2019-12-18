@@ -41,38 +41,43 @@ namespace SportsStore
             #endregion
 
             #region Toon alle customers gesorteerd op naam, en vervolgens dalend op voornaam
-            IEnumerable<Customer> customersSorted = null;
+            IEnumerable<Customer> customersSorted = customers.OrderBy(c => c.Name).ThenByDescending(c => c.FirstName);
             PrintCustomers("Klanten gesorteerd op naam, en dan dalend op voornaam:", customersSorted);
             Console.ReadLine();
             #endregion
 
             #region Toon alle producten die meer dan 92.5 dollar kosten, dalend op prijs
-            IEnumerable<Product> expensiveProducts = null;
+            IEnumerable<Product> expensiveProducts = products.Where(p => p.Price > 92.5M).OrderByDescending(p => p.Price);
             PrintProducts("Producten die meer dan 92.5 dollar kosten", expensiveProducts);
             Console.ReadLine();
             #endregion
 
             #region  Toon de categorieen die meer dan twee producten bevatten
 
-            IEnumerable<Category> myCategories = null;
+            IEnumerable<Category> myCategories = categories.Where(c => c.Products.Count > 2);
             PrintCategories("Categorieën met meer dan twee producten", myCategories);
             Console.ReadLine();
             #endregion
 
             #region  Maak een lijst van strings die alle productnamen bevat
-            IEnumerable<string> productNamen = null;
+            IEnumerable<string> productNamen = products.Select(p => p.Name).ToList();
             PrintStrings("Namen van producten", productNamen);
             Console.ReadLine();
             #endregion
 
             #region Maak een lijst van namen van steden waar customers wonen (zonder dubbels) 
-            IEnumerable<string> steden = null;
+            IEnumerable<string> steden = customers.Select(c => c.City.Name).Distinct().ToList();
             PrintStrings("Namen van steden waar klanten wonen", steden);
             Console.ReadLine();
             #endregion
 
             #region Maak een lijst van ProductViewModels (vorm elk product om tot een productViewModel)
-            IEnumerable<ProductViewModel> pvm = null;
+            IEnumerable<ProductViewModel> pvm = products.Select(p => new ProductViewModel
+            {
+                Name = p.Name,
+                Price = p.Price,
+                PriceEuro = p.Price * 0.9M
+            }).ToList();
             Console.WriteLine("Lijst van ProductViewModels");
             foreach (var p in pvm)
             {
