@@ -3,6 +3,7 @@ using SportsStore.Models;
 using SportsStore.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SportsStore
 {
@@ -16,7 +17,7 @@ namespace SportsStore
             IEnumerable<Product> products = DataSourceProvider.Products;
 
             #region Toon de gemiddelde prijs van de producten
-            var gemiddelde = 0;
+            var gemiddelde = products.Average(p => p.Price);
             Console.WriteLine($"De gemiddelde prijs van de producten is { gemiddelde:0.00}");
             Console.ReadLine();
             #endregion
