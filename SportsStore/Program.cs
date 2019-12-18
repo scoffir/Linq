@@ -23,8 +23,8 @@ namespace SportsStore
             #endregion
 
             #region Toon hoeveel categorieen en hoeveel customers er zijn
-            Console.WriteLine($"Er zijn {0} categorieen.");
-            Console.WriteLine($"Er zijn {0} customers.");
+            Console.WriteLine($"Er zijn {categories.Count()} categorieen.");
+            Console.WriteLine($"Er zijn {customers.Count()} customers.");
             Console.ReadLine();
             #endregion
 
