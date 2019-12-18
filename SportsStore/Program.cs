@@ -29,7 +29,7 @@ namespace SportsStore
             #endregion
 
             #region Hoeveel karakters telt de langste productnaam?
-            Console.WriteLine($"De langste productnaam is {0} karakters lang.");
+            Console.WriteLine($"De langste productnaam is {products.Max(p => p.Name.Length)} karakters lang.");
             Console.ReadLine();
             #endregion
 
